@@ -1,16 +1,14 @@
 import { useState } from "react";
-import { getIntakes, saveIntakes, getLoggedUser } from "../utils/storage";
+import { getIntakes, saveIntakes } from "../utils/storage";
 import { useParams, useNavigate } from "react-router-dom";
 
 export default function EditIntake() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const user = getLoggedUser();
   const intakes = getIntakes();
   const entry = intakes.find(i => i.id === Number(id));
 
   const [qty, setQty] = useState(entry?.quantity || "");
-
   const update = () => {
     if (!qty || qty <= 0) {
       alert("Please enter a valid quantity in ml");
